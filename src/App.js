@@ -1,7 +1,7 @@
 import "./Index.css";
 import Crew from "./components/Crew";
 import { useState } from "react";
-import {v4 as uuidv4} from "uuid"; 
+// import {v4 as uuidv4} from "uuid"; 
 
 function App() {
   const [crewMembers , setCrewMembers] = useState([
@@ -76,7 +76,7 @@ function App() {
   function updateCrewMember(id,newName,newRole){
     console.log("Update crew member..........");
     const updatedCrewMembers = crewMembers.map((crewMember) => {
-      if(id == crewMember.id)
+      if(id === crewMember.id)
         return {...crewMember, name:newName , role:newRole};
       return crewMember;
       })
