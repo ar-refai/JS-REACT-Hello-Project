@@ -94,6 +94,16 @@ function App() {
     console.log([...crewMembers]);
     setCrewMembers([...crewMembers, newCrewMember]);
   }
+  //deleting crew members function
+  function deleteCrewMember(id){
+    crewMembers.forEach((crewMember) => {
+      if(id === crewMember.id){
+        crewMembers.splice(crewMembers.indexOf(crewMember), 1);
+        setCrewMembers([...crewMembers]);
+      }
+    });
+    console.log("Hello From Delete Func");
+  }
   return (
     <div className="app flex flex-col">
       <div className="flex flex-wrap justify-center">
@@ -106,6 +116,7 @@ function App() {
               role={member.role}
               img={member.img}
               updateCrewMember={updateCrewMember}
+              deleteCrewMember={deleteCrewMember}
             />
           );
         })}
