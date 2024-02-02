@@ -1,10 +1,13 @@
 import "./Index.css";
 import Crew from "./components/Crew";
 import { useState } from "react";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import AddCrewMember from "./components/AddCrewMember";
+import EditCrewMember from "./components/EditCrewMember";
+import DeleteCrewMember from "./components/DeleteCrewMember";
 
 function App() {
+  //Crew Members Array
   const [crewMembers, setCrewMembers] = useState([
     {
       id: 1,
@@ -73,7 +76,18 @@ function App() {
       img: "https://cdn.pixabay.com/photo/2019/08/11/11/47/calm-usopp-4398785_1280.jpg",
     },
   ]);
-  //updating crew members function 
+  //function for adding crew members
+  function addCrewMember(name, role, img) {
+    const newCrewMember = {
+      id: uuidv4(),
+      name: name,
+      role: role,
+      img: img,
+    };
+    console.log([...crewMembers]);
+    setCrewMembers([...crewMembers, newCrewMember]);
+  }
+  //function for updating crew members
   function updateCrewMember(id, newName, newRole) {
     console.log("Update crew member..........");
     const updatedCrewMembers = crewMembers.map((crewMember) => {
@@ -83,22 +97,11 @@ function App() {
     });
     setCrewMembers(updatedCrewMembers);
   }
-  //adding crew members function
-  function addCrewMember(name, role, img){
-    const newCrewMember = {
-      id: uuidv4(),
-      name: name,
-      role: role, 
-      img: img,
-    };
-    console.log([...crewMembers]);
-    setCrewMembers([...crewMembers, newCrewMember]);
-  }
-  //deleting crew members function
-  function deleteCrewMember(id){
+  //function for deleting crew members
+  function deleteCrewMember(id) {
     crewMembers.forEach((crewMember) => {
-      if(id === crewMember.id){
-        console.log(id , crewMember.id);
+      if (id === crewMember.id) {
+        console.log(id, crewMember.id);
         crewMembers.splice(crewMembers.indexOf(crewMember), 1);
         setCrewMembers([...crewMembers]);
       }
@@ -108,6 +111,25 @@ function App() {
     <div className="app flex flex-col">
       <div className="flex flex-wrap justify-center">
         {crewMembers.map((member, arr) => {
+          // Update CrewMember Button Component To Be Sent To CrewMember CardComponents
+          const UpdateCrewMemberComponent = (
+            <EditCrewMember
+              id={member.id}
+              name={member.name}
+              role={member.role}
+              updateCrewMember={updateCrewMember}
+            />
+          );
+          // Delete CrewMember Button Component To Be Sent To CrewMember CardComponents
+          const DeleteCrewMemberComponent = (
+            <DeleteCrewMember
+              id={member.id}
+              name={member.name}
+              role={member.role}
+              img={member.img}
+              DeleteCrewMember={deleteCrewMember}
+            />
+          );
           return (
             <Crew
               key={member.id}
@@ -115,14 +137,15 @@ function App() {
               name={member.name}
               role={member.role}
               img={member.img}
-              updateCrewMember={updateCrewMember}
-              deleteCrewMember={deleteCrewMember}
+              updateCrewMember={UpdateCrewMemberComponent}
+              deleteCrewMember={DeleteCrewMemberComponent}
             />
           );
         })}
       </div>
+      {/* Add Crew Member Component */}
       <div className="flex justify-content-center">
-      <AddCrewMember addCrewMember = {addCrewMember}/>
+        <AddCrewMember addCrewMember={addCrewMember} />
       </div>
     </div>
   );
