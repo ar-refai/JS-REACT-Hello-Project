@@ -98,11 +98,11 @@ function App() {
   function deleteCrewMember(id){
     crewMembers.forEach((crewMember) => {
       if(id === crewMember.id){
+        console.log(id , crewMember.id);
         crewMembers.splice(crewMembers.indexOf(crewMember), 1);
         setCrewMembers([...crewMembers]);
       }
     });
-    console.log("Hello From Delete Func");
   }
   return (
     <div className="app flex flex-col">

@@ -4,20 +4,23 @@ import Modal from "react-bootstrap/Modal";
 function AddCrewMember(props) {
 // use this use state to change the props in the parent component
 const [show, setShow] = useState(false);
-let [name, setName] = useState('');
-let [role, setRole] = useState('');
-let [img, setImg] = useState('');
-
+let [name, setName] = useState("");
+let [role, setRole] = useState("");
+let [img, setImg] = useState("");
 
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 
 return (
 <>
-
-    <button onClick={handleShow} className="m-1 px-6 py-2 bg-purple-600 text-lg text-white-600 font-semibold rounded-full border border-solid border-2 border-purple-900 hover:text-purple-600 hover:bg-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-        + Add a Pirate
+    <button
+    type="button"
+    onClick={handleShow}
+    className="block mx-auto text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-md px-8 py-3 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+    >
+    + Add A Pirate
     </button>
+
     <Modal
     show={show}
     onHide={handleClose}
@@ -26,52 +29,95 @@ return (
     >
     <Modal.Header closeButton>
         <Modal.Title>
-        <span className="text-black">
-            Add Pirate Crew Member
-        </span>
+            <span className='text-black'>
+                Add A New Pirate To The Crew
+            </span>
         </Modal.Title>
     </Modal.Header>
     <Modal.Body>
-    <form 
-        id = "addModal" 
+        <form
+        id="addModal"
+        className="max-w-sm mx-auto"
         onSubmit={(e) => {
-            handleClose();
             e.preventDefault();
-            // console.log("hello from addModal");
-            // console.log(props.id,name,role);
-            props.addCrewMember(name,role,img);
+            handleClose();
+            props.addCrewMember(name, role, img);
             setName('');
             setRole('');
             setImg('');
-        }} 
-        className="bg-white rounded px-8 pt-6 pb-4 mb-2">
-
+        }}
+        >
         <div className="mb-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="member-name">
-            Name:
+            <label
+            htmlFor="create-pirate-name"
+            className="block mb-2 text-md font-medium  text-purple-700"
+            >
+            Pirate Name :
             </label>
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="member-name" type="text" defaultValue={name} onChange={(e) => {setName(e.target.value)}} placeholder="John Smith" />
+            <input
+            type="text"
+            id="create-pirate-name"
+            className="bg-white border border-purple-600 text-black text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Jack Sparrow"
+            defaultValue={name}
+            onChange={(e) => {
+                setName(e.target.value);
+            }}
+            />
         </div>
         <div className="mb-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="member-role">
-            Role:
+            <label
+            htmlFor="create-pirate-role"
+            className="block mb-2 text-md font-medium text-purple-700"
+            >
+            Pirate Role :
             </label>
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="member-role" type="text" defaultValue={role} onChange={(e) => {setRole(e.target.value)}} placeholder="Sailor" />
+            <input
+            type="text"
+            id="create-pirate-role"
+            className="bg-white border border-gray-600 text-black text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Ship's Captin"
+            defaultValue={role}
+            onChange={(e) => {
+                setRole(e.target.value);
+            }}
+            />
         </div>
         <div className="mb-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="member-image">
-            Image URL:
+            <label
+            htmlFor="create-pirate-image"
+            className="block mb-2 text-md font-medium text-purple-700"
+            >
+            Pirate Image :
             </label>
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="member-image" type="text" defaultValue={img} onChange={(e) => {setImg(e.target.value)}} placeholder="https://www.google.com/" />
+            <input
+            type="text"
+            id="create-pirate-image"
+            className="bg-white border border-gray-600 text-black text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="https:\\www.google.com\"
+            defaultValue={img}
+            onChange={(e) => {
+                setImg(e.target.value);
+            }}
+            />
         </div>
-    </form>
+        </form>
     </Modal.Body>
     <Modal.Footer>
-        <button onClick={handleClose} className="px-4 py-1 text-lg text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-                Close
+        <button
+        type="button"
+        onClick={handleClose}
+        className="text-purple-900 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+        >
+        Close
         </button>
-        <button form = "addModal" className="px-4 py-1 text-lg text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">
-                Add Pirate
+
+        <button
+        form="addModal"
+        type="submit"
+        className="text-purple-900 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-md px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+        >
+        recruit
         </button>
     </Modal.Footer>
     </Modal>
